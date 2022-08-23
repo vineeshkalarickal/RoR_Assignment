@@ -7,5 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # 10.times do |x|
-#   Stock.create(name:"Product#{x}", price:"200", image:"path_img_#{x}", quantity:'1', store_id:1 )
+#   Products.create(name:"Product#{x}", price:"200", image_url:"path_img_#{x}", quantity:5, store_id:1 )
 # end
+
+# Product.new(name:"Sandisk Card",price:250.00,image_url:"img_path",quantity:3,category_id:"1",store_id:"1")
