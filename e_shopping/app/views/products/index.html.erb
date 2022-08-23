@@ -1,8 +1,15 @@
+<div class="span12" id="mainCol">
+  <ul class="breadcrumb">
+    <li>
+    <li><%= link_to "Home", root_path %>
+      <span class="divider">/</span></li>
+  <li class="active">Products</li>
+</ul>
+<h1>Products</h1>
+<hr class="soft"/>
+
 <div class="row">
   <div class="span12">
-    <h4>
-      Products
-    </h4>
     <ul class="thumbnails">
     <% @products.each do |product| %>
       <li class="span3">
