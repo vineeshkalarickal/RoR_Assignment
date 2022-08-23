@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get "contact", to: 'home#contact_us'
   get "products", to: 'products#index'
   get "view_product/:id", to: 'products#view_product'
+  get "list_products", to: 'products#list_products'
 end

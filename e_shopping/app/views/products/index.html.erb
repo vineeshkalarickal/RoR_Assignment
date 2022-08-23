@@ -1,28 +1,28 @@
-<h1>Products</h1>
-<table class="table table-stripes table-hover table-bordered">
-  <thead class='table-dark'>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price (Rs.)</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">View</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="row">
+  <div class="span12">
+    <h4>
+      Products
+    </h4>
+    <ul class="thumbnails">
     <% @products.each do |product| %>
-      <tr>
-        <th scope="row"><%= product.id %></th>
-        <td><%= product.name %></td>
-        <td><%= product.price %></td> 
-        <td><%= product.quantity %></td>
-        <td><%= link_to 'Show', { controller: 'products', action: 'view_product' ,id:product.id }, class:'btn btn-primary btn-sm' %></td>
-        <td>Edit</td>
-        <td>Delete</td>
-      </tr>
+      <li class="span3">
+        <div class="thumbnail">
+        <i class=""><span class="badge badge-success pull-right">Rs. <%= product.price %></span></i>
+          <%= image_tag(product.image_url) %>
+          <div class="caption">
+            <h5><%= product.name %></h5>            
+            <h4 style="text-align:center">
+              <a class="btn" href="view_product/<%=product.id %>">
+                <i class="icon-zoom-in"></i>
+              </a>
+              <a class="btn btn-primary"  href="#">Add to Cart
+                <i class="icon-shopping-cart"></i>
+              </a>
+            </h4>
+          </div>
+        </div>
+      </li>
     <% end %>
-
-  </tbody>
-</table>
+    </ul>
+  </div>
+</div>

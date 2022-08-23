@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+bundle exec rails db:seed
+https://guides.rubyonrails.org/active_record_basics.html
