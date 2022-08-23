@@ -8,7 +8,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %> 
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "bootstrap.min", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "base", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "bootstrap-responsive.min", "data-turbo-track": "reload" %>
@@ -16,53 +16,78 @@
 
   </head>
   <body>
-<div id="header">
-    <!-- Navbar ================================================== -->
-    <div id="logoArea" class="navbar">
-      <div class="navbar-inner">
-        <a class="brand"><img src="../themes/images/logo.png" alt="Bootsshop"/></a>
-        <ul id="topMenu" class="nav pull-right">
-          <li class="nav-item">
-            <%= link_to "Home", root_path, class:"nav-link active" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "FAQ Page", home_faq_path, class:"nav-link" %>
-          </li>
-          <li class="">
-            <a href="contact.html">Contact</a>
-          </li>
-          <li class="">
-            <a href="#login" role="button" data-toggle="modal" style="padding-right:0">
-              <span class="btn btn-large btn-success">Login</span></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-</div>
-<% if current_page?(controller: 'home', action: 'index') || current_page?(root_url)  %>
-    <%= render "home/header" %>
-<% end%>
-    <div id="mainBody">
-      <div class="container" style="min-height:300px">
-        <br/>
-        <%= yield %>
-      </div>
-    </div>
-    <!-- Footer ================================================================== -->
-    <div id="footerSection">
-      <div class="container">
-        <div class="row">
-          E-Shop
+    <div id="header">
+      <!-- Navbar ================================================== -->
+      <div id="logoArea" class="navbar">
+        <div class="navbar-inner">
+          <a class="brand"><img src="../themes/images/logo.png" alt="Bootsshop"/></a>
+          <% if user_signed_in? %>
+            Logged in as
+            <strong><%= current_user.email %></strong>
+          <% end %>
+          <ul id="topMenu" class="nav pull-right">
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class:"nav-link active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "FAQ Page", home_faq_path, class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <% if user_signed_in? %>
+                <%= link_to 'Edit profile', edit_user_registration_path, :class => 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link' %>
+              <% else %>
+                <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Login", new_user_session_path, :class => 'btn btn-success btn-sm' %>
+              <% end %>
+            </li>
+          </ul>
         </div>
-        <p class="pull-right">&copy; VKS</p>
       </div>
-      <!-- Container End -->
     </div>
-    
-    <script src="../themes/js/jquery.js" type="text/javascript"></script>
-    <script src="../themes/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../themes/js/google-code-prettify/prettify.js"></script>
-    <script src="../themes/js/bootshop.js"></script>
-    <script src="../themes/js/jquery.lightbox-0.5.js"></script>
-  </body>
-</html>
+    <%
+=begin%>
+      <% if current_page?(controller: 'home', action: 'index') || current_page?(root_url)  %>
+        <%= render "home/header" %>
+      <% end%>
+      <%
+=end%>
+        <div id="mainBody">
+          <div class="container" style="min-height:300px">
+            <br/>
+
+            <% if notice %>
+              <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+              <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
+
+            <%= yield %>
+          </div>
+        </div>
+        <!-- Footer ================================================================== -->
+        <div id="footerSection">
+          <div class="container">
+            <div class="row">
+              E-Shop
+            </div>
+            <p class="pull-right">&copy; VKS</p>
+          </div>
+          <!-- Container End -->
+        </div>
+
+        <script src="../themes/js/jquery.js" type="text/javascript"></script>
+        <script src="../themes/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../themes/js/google-code-prettify/prettify.js"></script>
+        <script src="../themes/js/bootshop.js"></script>
+        <script src="../themes/js/jquery.lightbox-0.5.js"></script>
+      </body>
+    </html>
