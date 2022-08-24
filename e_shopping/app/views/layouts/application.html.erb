@@ -1,26 +1,12 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <title>E Shopping</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%#= javascript_include_tag :defaults %>
-      <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-      <%= stylesheet_link_tag "bootstrap.min", "data-turbo-track": "reload" %>
-      <%= stylesheet_link_tag "base", "data-turbo-track": "reload" %>
-      <%= stylesheet_link_tag "bootstrap-responsive.min", "data-turbo-track": "reload" %>
-      <%= stylesheet_link_tag "font-awesome", "data-turbo-track": "reload" %>
-
-    </head>
+<html lang="en">  
+  <%= render "home/header" %>
     <body>
       <div id="header">
       <%= render 'layouts/nav_bar' %>
       <%= render 'layouts/alerts' %>
       <% if current_page?(root_url) && !user_signed_in? %>
-        <%= render "home/header" %>
+        <%= render "home/carousal" %>
       <% end %>
       <div id="mainBody">
         <div class="container" style="min-height:300px">

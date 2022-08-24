@@ -8,37 +8,45 @@
   </ul>
   <div class="row">
     <div id="gallery" class="span3">
-        <%= image_tag(@product.image_url) %>   
-      </div>
-      <div class="span6">
-        <h3><%= @product.name %></h3>
-        <hr class="soft"/>
-        <form class="form-horizontal qtyFrm">
-          <div class="control-group">
-            <label class="control-label">
-              <span>Price: <%= @product.price %> Rs
-              <br class="clr">
-              Discunt: <%= @product.discount %> Rs</span></label>
-            <div class="controls">
-              <input type="number" class="span1" placeholder="Qty."/>
-              <button type="submit" class="btn btn-large btn-primary pull-right">
-                Add to cart
-                <i class=" icon-shopping-cart"></i>
-              </button>              
-            </div>            
-          </div>
-          <h6>Only <%= @product.quantity %> items in left</h6>
-        </form>
-
-        <hr class="soft"/>
-        <h4>Product Details</h4>
-        <hr class="soft clr"/>
-        <p><%= @product.details %></p>
-        <hr class="soft"/>
-      </div>
-
+      <%= image_tag(@product.image_url) %>
     </div>
+    <div class="span6">
+      <h3><%= @product.name %></h3>
+      <hr class="soft"/>
+      <form class="form-horizontal qtyFrm">
+        <div class="control-group">
+          <label class="control-label">
+            <span>Price: Rs
+              <%= @product.price %>
+              <br class="clr">
+              Discunt:
+              <%= @product.discount %>
+              Rs</span></label>
+              <% if current_user && !current_user.admin %>  
+          <div class="controls">
+            <input type="number" class="span1" placeholder="Qty."/>
+            <button type="submit" class="btn btn-large btn-primary pull-right">
+              Add to cart
+              <i class=" icon-shopping-cart"></i>
+            </button>
+          </div>
+          <% end %>
+        
+        </div>
+        <h6>Only
+          <%= @product.quantity %>
+          items in left</h6>
+      </form>
+
+      <hr class="soft"/>
+      <h4>Product Details</h4>
+      <hr class="soft clr"/>
+      <p><%= @product.details %></p>
+      <hr class="soft"/>
+    </div>
+
   </div>
+</div>
 </div>
 </div>
 </div>
