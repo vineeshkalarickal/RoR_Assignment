@@ -53,12 +53,13 @@ class ProductsController < ApplicationController
   end
 
   def edit
-
+    @product = Product.find(params[:id])
+    render :edit
   end
 
   def update
-    @product = Product.find(params[:id])
-    @product.update(products_params)
+    product = Product.find(params[:id])
+    product.update(product_params)
     redirect_to list_products_path
   end
 

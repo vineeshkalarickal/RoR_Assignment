@@ -39,3 +39,9 @@ end
 
 
 rails db:migrate
+
+
+
+<%= f.select :product_id,
+              options_from_collection_for_select(Product.all, "id", "product_name", f.object.product_id), 
+              prompt: "Select something" %>
