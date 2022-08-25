@@ -11,26 +11,24 @@
     <div id="gallery" class="span3">
       <%= image_tag(@product.image_url.url, alt: 'Image') %>
     </div>
+
     <div class="span6">
+    <span class="pull-right"><%= link_to '', { controller: 'products', action: 'edit' ,id:@product.id }, class:'btn icon-edit' %></span>
       <h3><%= @product.name %></h3>
       <hr class="soft"/>
-      <form class="form-horizontal qtyFrm">
-        <div class="control-group">
-          <label class="control-label">
-            <span>Price: Rs
-              <%= @product.price %>
-              <br class="clr">
-              Discunt:
-              <%= @product.discount %>
-              Rs</span></label>
-        </div>
-        <h6>Only
-          <%= @product.quantity %>
-          items in left</h6>
-      </form>
 
+      <div class="control-group">
+        <label class="control-label">
+          <span>Price: Rs
+            <%= @product.price %>
+            <br class="clr">
+            Discunt:
+            <%= @product.discount %>
+            Rs</span></label>
+      </div>
+      <h6>Only <%= @product.quantity %> items in left</h6>
       <hr class="soft"/>
-      <h4>Product Details</h4>
+      <h4>Details</h4>
       <hr class="soft clr"/>
       <p><%= @product.details %></p>
       <hr class="soft"/>
@@ -38,7 +36,5 @@
 
   </div>
 </div>
-</div>
-</div>
-</div>
+
 <!-- MainBody End ============================= -->

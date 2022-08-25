@@ -1,0 +1,12 @@
+<% if @product.errors.any? %>
+  <div class="alert alert-danger">
+    <%= pluralize(@product.errors.count, " Mandatory fields need to be specified") %>
+     <hr>
+    <% 
+    i=0 
+    @product.errors.each do |error| 
+    %>
+     <%= i+=1 %>) <%= error.full_message %>.  
+    <% end %>
+  </div>
+<% end %>

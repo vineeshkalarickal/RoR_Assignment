@@ -12,10 +12,11 @@
 
 <div class="row">
   <%= form_with class: "form-horizontal", model: @products do |form| %>
+  
   <div class="span6">
     <div class="well">
       <h4>Add Product</h4>
-
+      <%= render "show_validation_errors" %>
       <div class="control-group">
         <%= form.label "Name", class: "controlName", class: "control-label" %>
         <div class="controls">
