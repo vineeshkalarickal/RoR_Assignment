@@ -15,7 +15,7 @@
       <li class="span3">
         <div class="thumbnail">
         <i class=""><span class="badge badge-success pull-right">Rs. <%= product.price %></span></i>
-          <%= image_tag(product.image_url) %>
+          <%= image_tag(product.image_url.url, alt: 'Image') %>
           <div class="caption">
             <h5><%= product.name %></h5>            
             <h4 style="text-align:center">

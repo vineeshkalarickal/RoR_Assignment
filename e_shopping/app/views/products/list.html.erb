@@ -9,8 +9,9 @@
 <table class="table table-stripes table-hover table-bordered">
   <thead class='table-dark'>
     <tr>
-      <th scope="col">ID</th>
+      <th scope="col">Sl.No</th>
       <th scope="col">Name</th>
+      <th scope="col">Product ID</th>
       <th scope="col">Price (Rs.)</th>
       <th scope="col">Quantity</th>
       <th scope="col">View</th>
@@ -19,15 +20,18 @@
     </tr>
   </thead>
   <tbody>
-    <% @products.each do |product| %>
+    <% 
+    i = 0
+    @products.each do |product| %>
       <tr>
-        <th scope="row"><%= product.id %></th>
+        <td><%= i+=1 %></td>        
         <td><%= product.name %></td>
+        <td><%= product.id %></td>
         <td><%= product.price %></td>
         <td><%= product.quantity %></td>
         <td><%= link_to '', { controller: 'products', action: 'admin_view' ,id:product.id }, class:'btn icon-eye-open' %></td>
         <td><%= link_to '', { controller: 'products', action: 'admin_view' ,id:product.id }, class:'btn icon-edit' %></td>
-        <td><%= link_to '', { controller: 'products', action: 'show' ,id:product.id }, class:'btn icon-trash' %></td>
+        <td><%= button_to 'Delete', { controller: 'products', action: 'destroy', id:product.id },data: { confirm: "Are you sure?" }, method:'delete', class:'btn btn-sm btn-danger' %></td>
       </tr>
     <% end %>
 

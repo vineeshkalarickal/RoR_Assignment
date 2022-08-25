@@ -1,15 +1,15 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_product, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @products = Product.all
+    @products = Product.order('created_at DESC')
   end
 
   # for admin users only
   def list
     if current_user.admin == true
-      @products = Product.all
+      @products = Product.order('created_at DESC')
     else
       redirect_to products_path
     end
@@ -39,12 +39,12 @@ class ProductsController < ApplicationController
   def create
     if current_user.admin == true
       product = Product.new(product_params)
-
       if product.save
         flash[:notice] = 'Saved Successfully!'
-        redirect_to product
+        redirect_to list_products_path
       else
         flash.now[:error] = 'Could not save'
+        render :new
       end
 
     else
@@ -52,17 +52,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
   def update
     @product = Product.find(params[:id])
     @product.update(products_params)
-    redirect_to products_path
+    redirect_to list_products_path
   end
 
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
     flash[:note] = 'delete record succesfully'
-    redirect_to  products_path
+    redirect_to  list_products_path
   end
 
   private
