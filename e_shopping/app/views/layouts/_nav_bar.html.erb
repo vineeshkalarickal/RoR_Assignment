@@ -2,10 +2,6 @@
 <div id="logoArea" class="navbar">
   <div class="navbar-inner">
     <a class="brand"><img src="../themes/images/logo.png" alt="Bootsshop"/></a>
-    <% if user_signed_in? %>
-      Logged in as
-      <strong><%= current_user.email %></strong>
-    <% end %>
     <ul id="topMenu" class="nav pull-right">
       <li class="nav-item">
         <%= link_to "Home", root_path, class:"nav-link active" %>
@@ -16,9 +12,15 @@
       <li class="nav-item">
         <%= link_to "Contact Us", contact_path, class:"nav-link" %>
       </li>
-      <li class="nav-item">
-        <%= link_to "Products", products_path, class:"nav-link" %>
-      </li>
+      <% if current_user && current_user.admin %>
+        <li class="nav-item">
+          <%= link_to "List Products", list_products_path, class:"nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Products", products_path, class:"nav-link" %>
+        </li>
+      <% end %>
       <li class="nav-item">
         <% if user_signed_in? %>
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'nav-link' %>
@@ -29,10 +31,18 @@
           <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link' %>
         </li>
         <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, :class => 'btn btn-success btn-sm' %>
+          <%= link_to "Sign In", new_user_session_path %>
         <% end %>
       </li>
     </ul>
+  </div>
+  <div class="pull-right">
+    <% if user_signed_in? %>
+      <span class="btn btn-mini btn-danger">
+        Logged in as:
+        <strong><%= current_user.username %></strong>
+      </span>
+    <% end %>
   </div>
 </div>
 </div>
