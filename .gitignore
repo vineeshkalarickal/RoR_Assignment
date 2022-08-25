@@ -30,6 +30,6 @@
 !/e_shopping/tmp/storage/.keep
 
 /e_shopping/public/assets
-
+/e_shopping/public/uploads
 # Ignore master key for decrypting credentials and more.
 /e_shopping/config/master.key
