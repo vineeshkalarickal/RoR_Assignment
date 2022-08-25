@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def username
-    return self.email.split('@')[0].capitalize
+    return self.name + ' [' + self.email + ']'
+    # self.email.split('@')[0].capitalize
   end
          
 end

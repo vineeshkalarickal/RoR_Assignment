@@ -2,9 +2,10 @@
   <ul class="breadcrumb">
     <li><%= link_to "Home", root_path %>
       <span class="divider">/</span></li>
-    <li><%= link_to "Products", products_path %>
+    <li>
+      <%= link_to "Products", products_path %>
       <span class="divider">/</span></li>
-    <li class="active">product Details</li>
+    <li class="active">Product Details</li>
   </ul>
   <div class="row">
     <div id="gallery" class="span3">
@@ -22,7 +23,6 @@
               Discunt:
               <%= @product.discount %>
               Rs</span></label>
-              <% if current_user && !current_user.admin %>  
           <div class="controls">
             <input type="number" class="span1" placeholder="Qty."/>
             <button type="submit" class="btn btn-large btn-primary pull-right">
@@ -30,8 +30,6 @@
               <i class=" icon-shopping-cart"></i>
             </button>
           </div>
-          <% end %>
-        
         </div>
         <h6>Only
           <%= @product.quantity %>
