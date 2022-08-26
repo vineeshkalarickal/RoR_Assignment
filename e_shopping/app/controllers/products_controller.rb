@@ -38,8 +38,8 @@ class ProductsController < ApplicationController
 
   def create
     if current_user.admin == true
-      product = Product.new(product_params)
-      if product.save
+      @product = Product.new(product_params)
+      if @product.save
         flash[:notice] = 'Saved Successfully!'
         redirect_to list_products_path
       else
@@ -58,8 +58,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    product = Product.find(params[:id])
-    product.update(product_params)
+    @roduct = Product.find(params[:id])
+    @product.update(product_params)
     redirect_to list_products_path
   end
 
