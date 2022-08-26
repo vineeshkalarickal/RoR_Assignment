@@ -17,7 +17,7 @@
       <h4>Edit Product</h4>
       <%= render "show_validation_errors" %>
       <div class="control-group">
-        <%= form.label "Name", class: "controlName", class: "control-label" %>
+        <%= form.label "Name", class: "control-label" %>
         <div class="controls">
           <%= form.text_field "product[name]", value: @product.name, placeholder: "Add Product Name" %>
         </div>
@@ -74,7 +74,7 @@
 
       <div class="control-group">
         <div class="controls">
-          <%= image_tag(@product.image_url.url, alt: 'Image') %>
+          <%= image_tag(@product.image_url.url, alt: 'Image', :size => '160x160') %>
         </div>
       </div>
 
