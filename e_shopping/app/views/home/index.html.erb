@@ -7,10 +7,12 @@
     <% @products.each do |product| %>
       <li class="span3">
         <div class="thumbnail">
-        <i class=""><span class="badge badge-success pull-right">&#8377; <%= product.price %></span></i>
+        <i class=""><span class="badge badge-success pull-right">&#8377; <%= product.price %></span>
+        <br><span class="badge badge-important pull-right"><%= product.discount %>% off </span></i>
           <%= image_tag(product.image_url.url, alt: 'Image', :size => '160x160') %>
           <div class="caption">
-            <h5><%= product.name %></h5>            
+            <h5><%= product.name %></h5> 
+            <p><%= pluralize(product.quantity, 'item') %> left</p>
             <h4 style="text-align:center">
               <a class="btn" href="view_product/<%=product.id %>">
                 <i class="icon-zoom-in"></i>

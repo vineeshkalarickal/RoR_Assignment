@@ -20,19 +20,21 @@
             <span>Price: &#8377;
               <%= @product.price %>
               <br class="clr">
-              Discount: &#8377; <%= @product.discount %>
-              </span></label>
+              Discount: <%= @product.discount %> %
+            </span>
+          </label>
           <div class="controls">
-            <input type="number" class="span1" placeholder="Qty."/>
+            <input type="number" class="span1" placeholder="Qty." value="<%= @product.quantity %>"/>
             <button type="submit" class="btn btn-large btn-primary pull-right">
               Add to cart
               <i class=" icon-shopping-cart"></i>
             </button>
           </div>
         </div>
-        <h6>Only
-          <%= @product.quantity %>
-          items in left</h6>
+        <h6>
+          <p><%= pluralize(@product.quantity, 'item') %>
+            left</p>
+        </h6>
       </form>
 
       <hr class="soft"/>
