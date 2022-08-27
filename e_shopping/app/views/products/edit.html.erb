@@ -26,7 +26,7 @@
       <div class="control-group">
         <%= form.label :price, "Price", class: "control-label" %>
         <div class="controls">
-          <%= form.number_field "product[price]", value: @product.price, placeholder: "Add Price" %>
+          <%= form.number_field "product[price]", value: @product.price, min:1, placeholder: "Add Price" %>
 
         </div>
       </div>
@@ -34,14 +34,14 @@
       <div class="control-group">
         <%= form.label :discount, "Price discount", class: "control-label" %>
         <div class="controls">
-          <%= form.number_field "product[discount]", value: @product.discount, in: 5..100, step: 5, placeholder: "Discount Price in percentage" %>
+          <%= form.number_field "product[discount]", value: @product.discount, in: 0..100, step: 5, placeholder: "Discount Price in percentage" %>
         </div>
       </div>
 
       <div class="control-group">
         <%= form.label :quantity, "Quantity", class: "control-label" %>
         <div class="controls">
-          <%= form.number_field "product[quantity]", value: @product.quantity, placeholder: "Add number of items in stock" %>
+          <%= form.number_field "product[quantity]", value: @product.quantity, min:1, placeholder: "Add number of items in stock" %>
         </div>
       </div>
 

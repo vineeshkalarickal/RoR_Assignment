@@ -17,38 +17,39 @@
     <div class="well">
       <h4>Add Product</h4>
       <%= render "show_validation_errors" %>
-      <div class="control-group">
+<div class="control-group">
         <%= form.label "Name", class: "control-label" %>
         <div class="controls">
-          <%= form.text_field "product[name]", placeholder: "Add Product Name" %>
+          <%= form.text_field "product[name]", value: @product.name, placeholder: "Add Product Name" %>
         </div>
       </div>
 
       <div class="control-group">
         <%= form.label :price, "Price", class: "control-label" %>
         <div class="controls">
-          <%= form.number_field "product[price]", placeholder: "Add Price" %>
+          <%= form.number_field "product[price]", value: @product.price, min:1, placeholder: "Add Price" %>
+
         </div>
       </div>
 
       <div class="control-group">
         <%= form.label :discount, "Price discount", class: "control-label" %>
         <div class="controls">
-          <%= form.number_field "product[discount]", in: 5..100, step: 5, placeholder: "Discount Price in percentage" %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= form.label :image_url, "Image", class: "control-label" %>
-        <div class="controls">
-          <%= form.file_field "product[image_url]", placeholder: "Upload Image" %>
+          <%= form.number_field "product[discount]", value: @product.discount, in: 0..100, step: 5, placeholder: "Discount Price in percentage" %>
         </div>
       </div>
 
       <div class="control-group">
         <%= form.label :quantity, "Quantity", class: "control-label" %>
         <div class="controls">
-          <%= form.number_field "product[quantity]", placeholder: "Add number of items in stock" %>
+          <%= form.number_field "product[quantity]", value: @product.quantity, min:1, placeholder: "Add number of items in stock" %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= form.label :category_id, "Category", class: "control-label" %>
+        <div class="controls">
+          <%= form.select "product[category_id]", [["-NA-",0],["Camera",1], ["Clothes",2], ["Computer",3]], selected: @product.category_id %>
         </div>
       </div>
 
@@ -59,23 +60,22 @@
     <div class="well">
 
       <div class="control-group">
-        <%= form.label :category_id, "Category", class: "control-label" %>
+        <%= form.label :details, "Additional Details", class: "control-label" %>
         <div class="controls">
-          <%= form.select "product[category_id]", [["-NA-",0],["Camera",1], ["Clothes",2], ["Computer",3]] %>
+          <%= form.text_area "product[details]", value: @product.details, size: "100x5" %>
         </div>
       </div>
-
       <div class="control-group">
         <%= form.label :store_id, "Store Location", class: "control-label" %>
         <div class="controls">
-          <%= form.select "product[store_id]", [["-NA-",0],["Berlin",1], ["Chicago",2], ["Madrid",3]] %>
+          <%= form.select "product[store_id]", [["-NA-",0],["Berlin",1], ["Chicago",2], ["Madrid",3]], selected: @product.store_id %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= form.label :details, "Additional Details", class: "control-label" %>
+        <%= form.label :image_url, "Image", class: "control-label" %>
         <div class="controls">
-          <%= form.text_area "product[details]", size: "100x5" %>
+          <%= form.file_field "product[image_url]", placeholder: "Upload Image" %>
         </div>
       </div>
 
