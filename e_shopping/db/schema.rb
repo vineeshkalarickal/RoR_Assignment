@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_26_091427) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_26_170151) do
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id"
     t.string "address"
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_091427) do
     t.string "city"
     t.string "state"
     t.integer "zip"
-    t.boolean "default", default: true
+    t.boolean "default", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,12 @@
+<% if @address.errors.any? %>
+  <div class="alert alert-danger">
+    <%= pluralize(@address.errors.count, " Issue found ") %>
+     <hr>
+    <% 
+    i=0 
+    @address.errors.each do |error| 
+    %>
+     <%= i+=1 %>) <%= error.full_message %>.  
+    <% end %>
+  </div>
+<% end %>
