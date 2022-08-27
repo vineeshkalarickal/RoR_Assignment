@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><%= link_to "Home", root_path %>
+        <span class="divider">/</span></li>
+      <li class="active">Edit
+        <%= resource_name.to_s.humanize %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="span6">
+    <div class="well">
+
+      <%= f.error_notification %>
+
+      <div class="control-group">
+        <%= f.input :email, required: true, autofocus: true, readonly:true %>
+      </div>
+
+      <div class="control-group">
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <p>Currently waiting confirmation for:
+            <%= resource.unconfirmed_email %></p>
+        <% end %>
+      </div>
+
+      <div class="control-group">
+        <%= f.input :name, hint: " Name is required", required: true %>
+      </div>
+
+      <div class="control-group">
+        <%= f.input :phone, hint: " Phone number is required", required: true %>
+      </div>
+      <div class="control-group">
+        <%= f.input :current_password, hint: " We need your current password to confirm your changes", required: true, input_html: { autocomplete: "current-password" } %>
+      </div>
+    </div>
+  </div>
+  <div class="span6">
+    <div class="well">
+
+      <div class="control-group">
+        <%= f.input :password, hint: " Leave it blank if you don't want to change it", required: false, input_html: { autocomplete: "new-password" } %>
+      </div>
+
+      <div class="control-group">
+        <%= f.input :password_confirmation, required: false, input_html: { autocomplete: "new-password" } %>
+      </div>
+
+      <div class="control-group">
+        <%= f.button :submit, "Update", class: "btn btn-primary btn-sm" %>
+      </div>
+
+      <div class="control-group">
+      <hr/>
+      </div>
+
+      <div class="control-group link-danger">
+        <p>Unhappy?
+          <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+      </div>
+
+      <div class="control-group">
+        <%= link_to "Back to Home", root_path %>
+      </div>
+
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,49 @@
+<ul class="breadcrumb">
+  <li><%= link_to "Home", root_path %>
+    <span class="divider">/</span></li>
+  <li class="active">Address Details</li>
+  <span class='pull-right'><%= link_to "Add New", new_address_path, class:'label label-important' %></span>
+</ul>
+
+<ul class="thumbnails">
+  <% @addresses.each do |addr| %>
+    <li class="span3">
+      <div class="thumbnail  text-left">
+      <% if addr.default? %><i class=""><span class="badge badge-success pull-right">Primary</span></i><% end %>
+        <table>
+          <tr>
+            <th>Address:</th>
+            <td><%= addr.address %></td>
+          </tr>
+          <tr>
+            <th>Street:</th>
+            <td><%= addr.street %></td>
+          </tr>
+          <tr>
+            <th>City:</th>
+            <td><%= addr.city %></td>
+          </tr>
+          <tr>
+            <th>State:</th>
+            <td><%= addr.state %></td>
+          </tr>
+          <tr>
+            <th>Zip:</th>
+            <td><%= addr.zip %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= link_to 'Edit', { controller: 'addresses', action: 'edit' ,id:addr.id }, class: 'btn btn-success btn-block' %></td>
+          </tr>
+          <tr>
+            <td><%= button_to 'Delete', { controller: 'addresses', action: 'destroy', id:addr.id },data: { confirm: "Are you sure?" }, method:'delete' , class: 'btn btn-danger' %></td>
+          </tr>
+        </table>
+      </div>
+    </li>
+  <% end %>
+
+</ul>

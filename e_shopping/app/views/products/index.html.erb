@@ -1,0 +1,35 @@
+<div class="span12" id="mainCol">
+  <ul class="breadcrumb">
+    <li>
+    <li><%= link_to "Home", root_path %>
+      <span class="divider">/</span></li>
+  <li class="active">Products</li>
+</ul>
+<h1>Products</h1>
+<hr class="soft"/>
+
+<div class="row">
+  <div class="span12">
+    <ul class="thumbnails">
+    <% @products.each do |product| %>
+      <li class="span3">
+        <div class="thumbnail">
+        <i class=""><span class="badge badge-success pull-right">Rs. <%= product.price %></span></i>
+          <%= image_tag(product.image_url.url, alt: 'Image', :size => '160x160') %>
+          <div class="caption">
+            <h5><%= product.name %></h5>            
+            <h4 style="text-align:center">
+              <a class="btn" href="view_product/<%=product.id %>">
+                <i class="icon-zoom-in"></i>
+              </a>
+              <a class="btn btn-primary"  href="#">Add to Cart
+                <i class="icon-shopping-cart"></i>
+              </a>
+            </h4>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<ul class="breadcrumb">
+  <li><%= link_to "Home", root_path %>
+    <span class="divider">/</span></li>
+  <li class="active">Products</li>
+</ul>
+<h4>Products
+  <span class='pull-right'><%= link_to "Add New", new_product_path, class:'btn btn-sm btn-primary' %></span>
+</h4>
+<table class="table table-stripes table-hover table-bordered">
+  <thead class='table-dark'>
+    <tr>
+      <th scope="col">Sl.No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Product ID</th>
+      <th scope="col">Price (&#8377;)</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">View</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% 
+    i = 0
+    @products.each do |product| %>
+      <tr>
+        <td><%= i+=1 %></td>        
+        <td><%= product.name %></td>
+        <td><%= product.id %></td>
+        <td><%= product.price %></td>
+        <td><%= product.quantity %></td>
+        <td><%= link_to '', { controller: 'products', action: 'admin_view' ,id:product.id }, class:'btn icon-eye-open' %></td>
+        <td><%= link_to '', { controller: 'products', action: 'edit' ,id:product.id }, class:'btn icon-edit' %></td>
+        <td><%= button_to 'Delete', { controller: 'products', action: 'destroy', id:product.id },data: { confirm: "Are you sure?" }, method:'delete', class:'btn btn-sm btn-danger' %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>

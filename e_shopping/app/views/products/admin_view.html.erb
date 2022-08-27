@@ -1,0 +1,39 @@
+<div class="span12">
+  <ul class="breadcrumb">
+    <li><%= link_to "Home", root_path %>
+      <span class="divider">/</span></li>
+    <li>
+      <%= link_to "Products", list_products_path %>
+      <span class="divider">/</span></li>
+    <li class="active">Product Details</li>
+  </ul>
+  <div class="row">
+    <div id="gallery" class="span3">
+      <%= image_tag(@product.image_url.url, alt: 'Image', :size => '160x160') %>
+    </div>
+
+    <div class="span6">
+    <span class="pull-right"><%= link_to '', { controller: 'products', action: 'edit' ,id:@product.id }, class:'btn icon-edit' %></span>
+      <h3><%= @product.name %></h3>
+      <hr class="soft"/>
+
+      <div class="control-group">
+        <label class="control-label">
+          <span>Price: &#8377;
+            <%= @product.price %>
+            <br class="clr">
+            Discount: &#8377; <%= @product.discount %>
+            </span></label>
+      </div>
+      <h6>Only <%= @product.quantity %> items in left</h6>
+      <hr class="soft"/>
+      <h4>Details</h4>
+      <hr class="soft clr"/>
+      <p><%= @product.details %></p>
+      <hr class="soft"/>
+    </div>
+
+  </div>
+</div>
+
+<!-- MainBody End ============================= -->
