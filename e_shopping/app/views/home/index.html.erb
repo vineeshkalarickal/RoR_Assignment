@@ -7,7 +7,7 @@
     <% @products.each do |product| %>
       <li class="span3">
         <div class="thumbnail">
-        <i class=""><span class="badge badge-success pull-right">Rs. <%= product.price %></span></i>
+        <i class=""><span class="badge badge-success pull-right">&#8377; <%= product.price %></span></i>
           <%= image_tag(product.image_url.url, alt: 'Image', :size => '160x160') %>
           <div class="caption">
             <h5><%= product.name %></h5>            

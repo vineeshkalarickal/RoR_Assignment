@@ -1,31 +1,38 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: {
     session: 'users/sessions',
     registrations: 'users/registrations'
   }
   # root
-  root "home#index"
+  root 'home#index'
 
   #get
   get 'home/index'
-  get "faq", to: 'home#faq'
-  get "contact", to: 'home#contact_us'
-  get "products", to: 'products#index'
-  get "view_product/:id", to: 'products#show'
-  get "list_products", to: 'products#list'
-  get 'admin_view', to: 'products#admin_view'
+  get 'faq', to: 'home#faq'
+  get 'contact', to: 'home#contact_us'
+  get 'profile', to: 'home#profile'
 
-  # add edit forms
-  get "new_product", to: 'products#new'
+  get 'products', to: 'products#index'
+  get 'view_product/:id', to: 'products#show'
+  get 'list_products', to: 'products#list'
+  get 'admin_view', to: 'products#admin_view'
+  get 'new_product', to: 'products#new'
   get 'edit_product/:id', to: 'products#edit', as: 'edit_product'
+
+  get 'addresses', to: 'addresses#index'
+  get 'new_address', to: 'addresses#new'
+  get 'edit_address/:id', to: 'addresses#edit', as: 'edit_address'
 
   # post
   post 'new_product', to: 'products#create'
+  post 'new_address', to: 'addresses#create'
 
   # delete
   delete 'delete_product/:id', to: 'products#destroy'
+  delete 'delete_address/:id', to: 'addresses#destroy'
 
   # patch
   patch 'edit_product/:id', to: 'products#update'
-
+  patch 'edit_address/:id', to: 'addresses#update'
 end

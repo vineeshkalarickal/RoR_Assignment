@@ -12,4 +12,9 @@ class HomeController < ApplicationController
     
   end
 
+  def profile
+    unless user_signed_in?
+      redirect_to products_path
+    end
+  end
 end
