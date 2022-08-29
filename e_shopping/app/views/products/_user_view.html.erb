@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="span12">
+    <ul class="thumbnails">
+    <% @products.each do |product| %>
+      <li class="span3">
+        <div class="thumbnail">
+        <i class=""><span class="badge badge-success pull-right">&#8377; <%= product.price %></span><br><span class="badge badge-important pull-right"><%= product.discount %>% off </span></i>
+
+          <%= image_tag(product.image_url.url, alt: 'Image', :size => '160x160') %>
+          <div class="caption">
+            <h5><%= product.name %></h5> 
+            <p><%= pluralize(product.quantity, 'item') %> left</p>
+            <h4 style="text-align:center">
+              <%= link_to "",  'view_product/'+product.id.to_s, class:"btn btn-success icon-zoom-in" %>
+              <%= link_to "",  'add_to_cart/'+product.id.to_s, class:"btn btn-primary icon-shopping-cart" %>
+            </h4>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>

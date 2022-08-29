@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  actual_price: 9.99
+  quantity: 1
+  final_price: 9.99
+  address_id: 1
+  order_status: MyString
+
+two:
+  user_id: 1
+  actual_price: 9.99
+  quantity: 1
+  final_price: 9.99
+  address_id: 1
+  order_status: MyString

@@ -4,4 +4,5 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :quantity, presence: true
   validates :details, presence: true, length: { maximum: 1000, too_long: " %{count} characters is the maximum allowed" }
+  has_many :line_items
 end
