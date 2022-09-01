@@ -1,19 +1,25 @@
 <!doctype html>
 <html lang="en">
-  <%= render "home/header" %>
+  <%= render "layouts/header" %>
   <body>
     <div id="header">
-      <%= render 'layouts/nav_bar' %>
-      <%= render 'layouts/alerts' %>
-      <% if current_page?(root_url) && !user_signed_in? %>
-        <%= render "home/carousal" %>
-      <% end %>
-      <div id="mainBody">
-        <div class="container" style="min-height:300px">
+      <div class="container">
+        <%= render "layouts/welcomeLine" %>
+        <%= render 'layouts/nav_bar' %>
+      </div>
+    </div>
+    <%= render 'layouts/alerts' %>
+    <% if current_page?(root_url) && !user_signed_in? %>
+      <%= render "home/carousal" %>
+    <% end %>
+    <div id="mainBody">
+      <div class="container" style="min-height:300px">
+        <div class="row">
           <br/>
           <%= yield %>
         </div>
       </div>
-      <%= render "home/footer" %>
-    </body>
-  </html>
+    </div>
+    <%= render "layouts/footer" %>
+  </body>
+</html>

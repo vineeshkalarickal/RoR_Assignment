@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <div id="welcomeLine" class="row">
+    <div class="span6">Welcome!<strong>
+        <%= current_user.username %>
+      </strong>
+    </div>
+    <div class="span6">
+      <%= render 'cart/cart_button' %>
+    </div>
+  </div>
+<% end %>
