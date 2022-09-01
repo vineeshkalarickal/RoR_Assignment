@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get 'new_address', to: 'addresses#new'
   get 'edit_address/:id', to: 'addresses#edit', as: 'edit_address'
 
-  get 'cart', to: 'cart#index'
+  get 'cart', to: 'cart#view_cart'
   get 'add_to_cart/:id', to: 'cart#index'
   # post
   post 'new_product', to: 'products#create'

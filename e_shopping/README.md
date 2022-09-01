@@ -41,7 +41,29 @@ end
 rails db:migrate
 
 
-
+DB Operations:
+----------------------------
 <%= f.select :product_id,
               options_from_collection_for_select(Product.all, "id", "product_name", f.object.product_id), 
               prompt: "Select something" %>
+
+
+
+------------------------
+in Controller
+-------------
+@cart_items = LineItem.left_outer_joins(:user, :cart, :product, :order).group(:product_id).to_sql
+
+in View
+-----------------
+<%= debug(@cart_items) %>
+
+IRB Query Running
+--------------
+irb(main):010:0> results = ActiveRecord::Base.connection.execute(' SELECT "line_items".* FROM "line_items" LEFT OUTER JOIN "users" ON "users"."id" = "line_items"."user_id" LEFT OUTER JOIN "carts" ON "carts"."id" = "line_items"."cart_id" LEFT OUTER JOIN "products" ON "products"."id" = "line_items"."product_id" LEFT OUTER JOIN "orders" ON "orders"."id" = "line_items"."order_id" GROUP BY "line_items"."product_id" ')
+
+irb(main):010:0> results.to_a
+
+
+
+

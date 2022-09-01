@@ -1,57 +1,50 @@
-<%= debug(@line_item)%>
+<%= debug(@line_item) %>
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Product</th>
       <th>Description</th>
       <th>Quantity</th>
-      <th>Price</th>
-      <th>Discount</th>
-      <th>Total</th>
+      <th>Price (&#8377;)
+      </th>
+      <th>Item Total (&#8377;)</th>
+      <th>Discount (%)</th>
+      <th>Final Price (&#8377;)</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    
-    <tr>
-      <td>      
-      <td>MASSA AST<br/>Color : black, Material : metal</td>
-      <td>
-        3
-      </td>
-      <td>$120.00</td>
-      <td>$25.00</td>
-      <td>$110.00</td>
-      <td>
-        <button class="btn btn-danger" type="button">
-          <i class="icon-remove icon-white"></i>
-        </button>
-      </td>
-    </tr>
-    
+    <%
+      total_items_price = lambda { |quantity,price| quantity*price }
+      final_price = lambda { |quantity,item_total| quantity*item_total }
+      final_amount_payable = 0
 
+      @cart_items.each do |line_item|
+      item_total = total_items_price.call(line_item.tot_items, line_item.item_price)
+      item_final_amount = final_price.call(line_item.tot_items, line_item.item_total)
+      final_amount_payable += item_final_amount
+    %>
     <tr>
-      <td colspan="5" style="text-align:right">Total Price:
+      <td><%= image_tag(line_item.product.image_url.url, alt: 'Image', :size => '60x60') %>
+      <td><%= line_item.product.name %></td>
+      <td><%= line_item.tot_items %></td>
+      <td><%= line_item.product.price %></td>
+      <td><%= item_total %></td>
+      <td><%= line_item.product.discount %></td>
+      <td><%= item_final_amount %></td>
+      <td><%= link_to '', root_path , class:'class="btn btn-danger icon-remove icon-white' %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td colspan="6" style="text-align:right">
+        <strong>TOTAL</strong>
       </td>
-      <td>$228.00</td>
+      <td><%= final_amount_payable %></td>
       <td></td>
     </tr>
     <tr>
-      <td colspan="5" style="text-align:right">Total Discount:
-      </td>
-      <td>$50.00</td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td colspan="5" style="text-align:right">
-        <strong>TOTAL ($228 - $50 + $31) =</strong>
-      </td>
-      <td class="label label-important" style="display:block">
-        <strong>
-          $155.00
-        </strong>
-      </td>
+      <td colspan="6" style="text-align:right"></td>
+      <td class="label label-important" style="display:block"><strong>Place your order</strong></td>
       <td></td>
     </tr>
   </tbody>
