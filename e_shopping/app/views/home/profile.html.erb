@@ -9,7 +9,7 @@
 
   <% if user_signed_in? %>
     <div class="row">
-      <table class="table table-striped table-bordered table-hover">
+      <table>
         <thead>
           <th></th>
         </thead>
@@ -31,7 +31,7 @@
             <div class="span6">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Manage account</h5>
+                  <h5 class="card-title">Manage User</h5>
                   <p class="card-text">Click Below button to edit your account details or change password</p>
                   <%= link_to 'Go', edit_user_registration_path, :class => 'btn btn-primary' %>
                 </div>
