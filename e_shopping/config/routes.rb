@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  get 'line_items/index'
+  get 'orders/index'
+  # root
+  root 'home#index'
 
   devise_for :users, controllers: {
     session: 'users/sessions',
     registrations: 'users/registrations'
   }
-  # root
-  root 'home#index'
 
   #get
   get 'home/index'
@@ -24,6 +26,8 @@ Rails.application.routes.draw do
   get 'new_address', to: 'addresses#new'
   get 'edit_address/:id', to: 'addresses#edit', as: 'edit_address'
 
+  get 'cart', to: 'cart#view_cart'
+  get 'add_to_cart/:id', to: 'cart#index'
   # post
   post 'new_product', to: 'products#create'
   post 'new_address', to: 'addresses#create'
