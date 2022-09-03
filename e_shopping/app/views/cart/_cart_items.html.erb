@@ -27,7 +27,7 @@
     %>
     <tr>
       <td><%= image_tag(line_item.product.image_url.url, alt: 'Image', :size => '60x60') %>
-      <td><%= line_item.product.name %></td>
+      <td><strong><a href="view_product/<%= line_item.product.id %>"><%= line_item.product.name %></a></strong></td>
       <td><%= line_item.tot_items %></td>
       <td><%= line_item.product.price %></td>
       <td><%= item_total %></td>

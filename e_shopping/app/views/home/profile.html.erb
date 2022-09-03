@@ -8,38 +8,56 @@
   <hr class="soft"/>
 
   <% if user_signed_in? %>
-    <div class="row">
-      <table>
-        <thead>
-          <th></th>
-        </thead>
-        <tr>
-          <td>
-            <% unless current_user && current_user.admin %>
-              <div class="span6">
-                <div>
-                  <div >
-                    <h5>Manage Addresses</h5>
-                    <p class="card-text">Manage your shiping address details</p>
-                    <%= link_to "Go", addresses_path, class:"btn btn-primary" %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </td>
-          <td>
-            <div class="span6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Manage User</h5>
-                  <p class="card-text">Click Below button to edit your account details or change password</p>
-                  <%= link_to 'Go', edit_user_registration_path, :class => 'btn btn-primary' %>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <ul class="thumbnails">
+
+      <li class="span4">
+        <div class="thumbnail  text-left">
+          <% unless current_user && current_user.admin %>
+            <h5><span class="icon-shopping-cart icon-white"></span> Manage Cart</h5>
+            <hr class="soft"/>
+            <p class="card-text">
+              <ol style="list-style-type: circle">
+                <li>View Cart Items</li>
+                <li>Delete Items</li>
+                <li>Place Order</li>
+              </ol>
+            </p>
+            <%= link_to "Go", cart_path, class:"btn btn-primary" %>
+          <% end %>
+        </div>
+      </li>
+
+      <li class="span4">
+        <div class="thumbnail  text-left">
+          <% unless current_user && current_user.admin %>
+            <h5><span class="icon-book icon-white"></span> Manage Addresses</h5>
+            <hr class="soft"/>
+            <p class="card-text">
+              <ol style="list-style-type: circle">
+                <li>Add Address</li>
+                <li>Edit Address</li>
+                <li>Set Primary Address</li>
+              </ol>
+            </p>
+            <%= link_to "Go", addresses_path, class:"btn btn-primary" %>
+          <% end %>
+        </div>
+      </li>
+      <li class="span4">
+        <div class="thumbnail">
+          <h5 class="card-title"><span class="icon-user icon-white"></span> Manage User</h5>
+          <hr class="soft"/>
+          <p class="card-text">
+            <ol style="list-style-type: circle">
+              <li>Cancel Account</li>
+              <li>Edit User Name or Phone Number</li>
+              <li>Change Current Password</li>
+            </ol>
+          </p>
+          <%= link_to 'Go', edit_user_registration_path, :class => 'btn btn-primary' %>
+        </div>
+      </li>
+    </ul>
+
   <% end %>
 </div>
