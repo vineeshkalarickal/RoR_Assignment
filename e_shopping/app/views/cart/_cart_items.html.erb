@@ -20,6 +20,7 @@
       final_amount_payable = 0
 
       @cart_items.each do |line_item|
+      
       item_total = total_items_price.call(line_item.tot_items, line_item.item_price)
       item_final_amount = final_price.call(line_item.tot_items, line_item.item_total)
       final_amount_payable += item_final_amount
@@ -32,7 +33,9 @@
       <td><%= item_total %></td>
       <td><%= line_item.product.discount %></td>
       <td><%= item_final_amount %></td>
-      <td><%= link_to '', root_path , class:'class="btn btn-danger icon-remove icon-white' %></td>
+      <td>
+      <%= button_to 'Delete', { controller: 'line_items', action: 'destroy', :id => line_item.id, :p_id =>line_item.product.id, :u_id =>line_item.user.id },data: { confirm: "Are you sure?" }, method:'delete', class:'btn btn-sm btn-danger' %>
+      </td>
     </tr>
     <% end %>
     <tr>
@@ -44,8 +47,8 @@
     </tr>
     <tr>
       <td colspan="6" style="text-align:right"></td>
-      <td class="label label-important" style="display:block"><strong>Place your order</strong></td>
-      <td></td>
+      <td>&nbsp;</td>
+      <td class="label label-success" style="display:block"><strong>Place your order</strong></td>      
     </tr>
   </tbody>
 </table>
