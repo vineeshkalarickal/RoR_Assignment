@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   # delete
   delete 'delete_product/:id', to: 'products#destroy'
   delete 'delete_address/:id', to: 'addresses#destroy'
-
+  delete 'delete_line_item/:id/:p_id/:u_id', to: 'line_items#destroy'
   # patch
   patch 'edit_product/:id', to: 'products#update'
   patch 'edit_address/:id', to: 'addresses#update'
