@@ -8,10 +8,16 @@
     <li class="active">Product Details</li>
   </ul>
   <div class="row">
-    <div id="gallery" class="span3">
+    <div id="gallery" class="span3" style="border:1px solid #ccc; padding:0.5em">
       <%= image_tag(@product.image_url.url, alt: 'Image', :size => '160x160') %>
     </div>
     <div class="span6">
+      <div class="controls">
+        <a href="/add_to_cart/<%= @product.id %>" type="submit" class="btn btn-large btn-primary pull-right">
+          Add to cart
+          <i class=" icon-shopping-cart"></i>
+        </a>
+      </div>
       <h3><%= @product.name %></h3>
       <hr class="soft"/>
       <form class="form-horizontal qtyFrm">
@@ -20,16 +26,11 @@
             <span>Price: &#8377;
               <%= @product.price %>
               <br class="clr">
-              Discount: <%= @product.discount %> %
+              Discount:
+              <%= @product.discount %>
+              %
             </span>
           </label>
-          <div class="controls">
-            <input type="number" class="span1" placeholder="Qty." value="<%= @product.quantity %>"/>
-            <button type="submit" class="btn btn-large btn-primary pull-right">
-              Add to cart
-              <i class=" icon-shopping-cart"></i>
-            </button>
-          </div>
         </div>
         <h6>
           <p><%= pluralize(@product.quantity, 'item') %>
