@@ -48,6 +48,11 @@ class AddressesController < ApplicationController
     redirect_to  addresses_path
   end
 
+  def primary_address
+    @address = Address.select(:id).where(default: true)
+    @primary_address = @address.id
+  end
+
   private
 
   def set_address
