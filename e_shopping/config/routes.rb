@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   # post
   post 'new_product', to: 'products#create'
   post 'new_address', to: 'addresses#create'
-
+  post 'place_order', to: 'line_items#place_order'
   # delete
   delete 'delete_product/:id', to: 'products#destroy'
   delete 'delete_address/:id', to: 'addresses#destroy'

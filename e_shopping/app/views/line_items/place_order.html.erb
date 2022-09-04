@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><%= link_to "Home", root_path %>
+        <span class="divider">/</span></li>
+      <li><%= link_to "Cart", cart_path %>
+        <span class="divider">/</span></li>
+      <li class="active">Order Details</li>
+    </ul>
+  </div>
+</div>
+<h2>Review your order</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price (&#8377;)</th>
+      <th>Quantity</th>
+      <th>Item Total (&#8377;)</th>
+      <th>Final Price (&#8377;)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%
+      total_items_price = lambda { |quantity,price| quantity*price }
+      final_price = lambda { |quantity,item_total| quantity*item_total }
+      final_amount_payable = 0
+
+      @place_order_items.each do |line_item|
+      @cart_id = line_item.cart_id
+      item_total = total_items_price.call(line_item.tot_items, line_item.item_price)
+      item_final_amount = final_price.call(line_item.tot_items, line_item.item_total)
+      final_amount_payable += item_final_amount
+    %>
+      <tr>
+
+        <td>
+          <strong>
+            <a href="view_product/<%= line_item.product.id %>"><%= line_item.product.name %></a>
+          </strong>
+        </td>
+        <td><%= line_item.product.price %></td>
+        <td><%= line_item.tot_items %></td>
+        <td><%= item_total %></td>
+        <td><%= item_final_amount %> (<%= line_item.product.discount %> % off)</td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="4" style="text-align:right">
+        <strong>Total amount to be paid </strong>
+      </td>
+      <td>&#8377;<%= final_amount_payable %></td>
+    </tr>
+    <tr>
+      <td colspan="4" style="text-align:left">
+      <strong>Shipping Address:</strong><br/>
+      <%= @shipping_address.address %>, <%= @shipping_address.street %>, 
+      <%= @shipping_address.city %>, <%= @shipping_address.state %>, 
+      <%= @shipping_address.zip %><br/>
+
+      </td>
+      <td class="" style="display:block">
+        <strong><%= button_to "Proceed to Check out", { controller: 'line_items', action: 'place_order', :cart_id => @cart_id, :user_id =>current_user.id }, method:'post', class:'btn btn-sm btn-block btn-primary' %></strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
