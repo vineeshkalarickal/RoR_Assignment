@@ -2,7 +2,7 @@ class AddressesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @addresses = Address.order('created_at ASC')
+    @addresses = Address.order('created_at ASC').where(user_id: current_user.id)
   end
 
   def new
@@ -46,11 +46,6 @@ class AddressesController < ApplicationController
     @address.destroy
     flash[:note] = 'delete record succesfully'
     redirect_to  addresses_path
-  end
-
-  def primary_address
-    @address = Address.select(:id).where(default: true)
-    @primary_address = @address.id
   end
 
   private

@@ -1,49 +1,58 @@
 <%#= debug(@line_item) %>
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Description</th>
-      <th>Quantity</th>
-      <th>Price (&#8377;)
-      </th>
-      <th>Item Total (&#8377;)</th>
-      <th>Discount (%)</th>
-      <th>Final Price (&#8377;)</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Price (&#8377;)
+        </th>
+        <th>Item Total (&#8377;)</th>
+        <th>Discount (%)</th>
+        <th>Final Price (&#8377;)</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
       total_items_price = lambda { |quantity,price| quantity*price }
       final_price = lambda { |quantity,item_total| quantity*item_total }
       final_amount_payable = 0
 
       @cart_items.each do |line_item|
-      
+      @cart_id = line_item.cart_id
       item_total = total_items_price.call(line_item.tot_items, line_item.item_price)
       item_final_amount = final_price.call(line_item.tot_items, line_item.item_total)
       final_amount_payable += item_final_amount
     %>
-    <tr>
-      <td><%= image_tag(line_item.product.image_url.url, alt: 'Image', :size => '60x60') %>
-      <td><strong><a href="view_product/<%= line_item.product.id %>"><%= line_item.product.name %></a></strong></td>
-      <td><%= line_item.tot_items %></td>
-      <td><%= line_item.product.price %></td>
-      <td><%= item_total %></td>
-      <td><%= line_item.product.discount %></td>
-      <td><%= item_final_amount %></td>
-      <td>
-      <%= button_to 'Delete', { controller: 'line_items', action: 'destroy', :id => line_item.id, :p_id =>line_item.product.id, :u_id =>line_item.user.id },data: { confirm: "Are you sure?" }, method:'delete', class:'btn btn-sm btn-danger' %>
-      </td>
-    </tr>
-    <% end %>
-    <tr>
-      <td colspan="6" style="text-align:right">
-        <strong>TOTAL (&#8377;)</strong>
-      </td>
-      <td><%= final_amount_payable %></td>
-      <td class="label label-success" style="display:block"><strong>Place your order</strong></td> 
-    </tr>
-  </tbody>
-</table>
+        <tr>
+          <td><%= image_tag(line_item.product.image_url.url, alt: 'Image', :size => '60x60') %>
+            <td>
+              <strong>
+                <a href="view_product/<%= line_item.product.id %>"><%= line_item.product.name %></a>
+              </strong>
+            </td>
+            <td><%= line_item.tot_items %></td>
+            <td><%= line_item.product.price %></td>
+            <td><%= item_total %></td>
+            <td><%= line_item.product.discount %></td>
+            <td><%= item_final_amount %></td>
+            <td>
+              <%= button_to 'Delete', { controller: 'line_items', action: 'destroy', :id => line_item.id, :p_id =>line_item.product.id, :u_id =>line_item.user.id },data: { confirm: "Are you sure?" }, method:'delete', class:'btn btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="6" style="text-align:right">
+            <strong>TOTAL (&#8377;)</strong>
+          </td>
+          <td><%= final_amount_payable %></td>
+          <td class="" style="display:block">
+            <strong><%= button_to "Place your order", { controller: 'line_items', action: 'place_order', :cart_id => @cart_id, :user_id =>current_user.id }, method:'post', class:'btn btn-sm btn-block btn-primary' %></strong>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="8" style="text-align:right"></td>
+        </tr>
+      </tbody>
+    </table>

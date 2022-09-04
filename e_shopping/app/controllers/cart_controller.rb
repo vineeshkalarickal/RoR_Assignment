@@ -3,9 +3,7 @@ class CartController < ApplicationController
   before_action :authenticate_user!
   include LineItemsHelper
 
-  def index
-
-  end
+  def index; end
 
   def view_cart
     @cart_items = view_line_items(current_user.id)
@@ -23,9 +21,8 @@ class CartController < ApplicationController
   end
 
   def create_new_cart(user_id)
-    lastSaved = Array.new
     cart = Cart.new(user_id: user_id)
     cart.save
-    return cart.id
+    cart.id
   end
 end
