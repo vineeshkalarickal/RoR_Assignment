@@ -13,10 +13,11 @@ class CartController < ApplicationController
 
   def create
     @cart = Cart.where(user_id: current_user.id).first
+    @cart_id = @cart.id unless @cart.blank?
     # if cart is not found, create a new one
-    @cart = create_new_cart(current_user.id) if @cart.blank?
+    @cart_id = create_new_cart(current_user.id) if @cart.blank?
     # call helper method to create_cart_items
-    create_line_items(params[:id], @cart.id)
+    create_line_items(params[:id], @cart_id)
 
     flash[:notice] = 'Successfully added to the cart'
   end
@@ -25,7 +26,6 @@ class CartController < ApplicationController
     lastSaved = Array.new
     cart = Cart.new(user_id: user_id)
     cart.save
-    lastSaved[id] = cart.id
-    return lastSaved
+    return cart.id
   end
 end
