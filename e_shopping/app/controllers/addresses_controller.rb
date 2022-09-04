@@ -14,6 +14,9 @@ class AddressesController < ApplicationController
     @address = Address.new(address_params)
     @address.user = current_user
     if @address.save
+      if @address.default == true
+        Address.where.not(id: @address.id).update_all(default: false)
+      end
       flash[:notice] = 'Saved Successfully!'
       redirect_to addresses_path
     else
@@ -28,7 +31,7 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address = Address.find(params[:id])    
+    @address = Address.find(params[:id])
     @address.update(address_params)
 
     if @address.default == true
