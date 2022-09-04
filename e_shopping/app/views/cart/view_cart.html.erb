@@ -10,6 +10,11 @@
 
 <div class="row">
   <div class="span12">
+  <% unless @cart_items.empty? %>
   <%= render "cart_items" %>
+  <% else %>
+  <div class="alert alert-info" role="alert"> Your cart is empty
+  </div>
+  <% end %>
   </div>
 </div>

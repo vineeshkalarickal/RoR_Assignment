@@ -22,7 +22,10 @@ class CartController < ApplicationController
   end
 
   def create_new_cart(user_id)
+    lastSaved = Array.new
     cart = Cart.new(user_id: user_id)
     cart.save
+    lastSaved[id] = cart.id
+    return lastSaved
   end
 end
