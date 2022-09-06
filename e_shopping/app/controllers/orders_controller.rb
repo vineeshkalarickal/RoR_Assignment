@@ -17,6 +17,14 @@ class OrdersController < ApplicationController
     end
   end
 
+  def view
+    @orders = Order.where(user_id: current_user.id).order('created_at DESC')
+  end
+
+  def view_details
+    @order = Order.find(params[:id])
+  end
+
   def place_order
     @place_order_items = 
     LineItem.select('line_items.*, products.*, carts.id,  SUM(line_items.quantity) as tot_items').left_outer_joins( :cart, :product ).group(:product_id).where(

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'add_to_cart/:id', to: 'cart#create'
 
   get 'view_order', to: 'orders#view'
+  get 'view_order_details/:id', to: 'orders#view_details'
 
   # post
   post 'new_product', to: 'products#create'

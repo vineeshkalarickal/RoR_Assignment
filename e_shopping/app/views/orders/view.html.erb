@@ -1,1 +1,43 @@
-<h1>View Order Details</h1>
+<div class="span12">
+  <ul class="breadcrumb">
+    <li><%= link_to "Home", root_path %>
+      <span class="divider">/</span></li>
+    <li>
+      <%= link_to "Settings", profile_path %>
+      <span class="divider">/</span></li>
+    <li class="active">Order Details</li>
+  </ul>
+  <div class="row">
+
+<h4>Order Details
+  <span class='pull-right'><%= link_to "View Cart", cart_path, class:'btn btn-sm btn-primary' %></span>
+</h4>
+<table class="table table-stripes table-hover table-bordered">
+  <thead class='table-dark'>
+    <tr>
+      <th scope="col">Sl.No</th>
+      <th scope="col">Order ID</th>
+      <th scope="col">Amount Payed (&#8377;)</th>
+      <th scope="col">Status</th>
+      <th scope="col">View</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% 
+    i = 0
+    @orders.each do |ord| %>
+      <tr>
+        <td><%= i+=1 %></td>        
+        <td><%= ord.id %></td>
+        <td><%= ord.final_price %></td>
+        <td><span  class="label label-success"><%= ord.order_status %></status></td>
+        <td><%= link_to '', { controller: 'orders', action: 'view_details' ,id: ord.id }, class:'btn icon-eye-open' %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+
+  </div>
+</div>
