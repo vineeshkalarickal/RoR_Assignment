@@ -11,7 +11,7 @@
 </div>
 <h2>Review your order</h2>
 <table class="table table-bordered">
-  <thead>
+  <thead style="background-color: #f0f0f0;">
     <tr>
       <th>Product</th>
       <th>Price (&#8377;)</th>
@@ -51,17 +51,39 @@
       </td>
       <td>&#8377;<%= final_amount_payable %></td>
     </tr>
+     <% unless @shipping_address.nil? %>
     <tr>
       <td colspan="4" style="text-align:left">
       <strong>Shipping Address:</strong><br/>
-      <%= @shipping_address.address %>, <%= @shipping_address.street %>, 
-      <%= @shipping_address.city %>, <%= @shipping_address.state %>, 
-      <%= @shipping_address.zip %><br/>
-
+      <div>     
+        <%= @shipping_address.address %>, <%= @shipping_address.street %>, 
+        <%= @shipping_address.city %>, <%= @shipping_address.state %>, 
+        <%= @shipping_address.zip %><br/>        
+      </div>
       </td>
       <td class="" style="display:block">
-        <strong><%= button_to "Proceed to Check out", { controller: 'line_items', action: 'place_order', :cart_id => @cart_id, :user_id =>current_user.id }, method:'post', class:'btn btn-sm btn-block btn-primary' %></strong>
+
+<%= form_with class: "form-horizontal", model: @orders, url: "/create_order", local: true do |f| %>
+<%= f.hidden_field "order[user_id]", value: current_user.id %>
+<%= f.hidden_field "order[address_id]", value: @shipping_address.id %>
+<%= f.hidden_field "order[final_price]", value: final_amount_payable %>
+<%= f.hidden_field "order[cart_id]", value: @cart_id %>
+<%= f.hidden_field "order[order_status]", value: 'ordered' %>
+<%
+=begin%>
+ ordered, ack, rejected, cancelled, delivered  
+<%
+=end%>
+<%= f.submit "Proceed to Check out", class:'btn btn-sm btn-block btn-primary' %></strong>
+<% end %>
+
       </td>
     </tr>
+    <% else %>
+    <tr>
+      <td colspan="6" style="text-align:left">
+        <div class="alert alert-danger" role="alert"> Please set a primary shipping address to place your order [<%= link_to "Go to Manage Address", addresses_path %>] </div>
+        </td>
+    <% end %>
   </tbody>
 </table>

@@ -48,7 +48,7 @@
           </td>
           <td><%= final_amount_payable %></td>
           <td class="" style="display:block">
-            <strong><%= button_to "Place your order", { controller: 'line_items', action: 'place_order', :cart_id => @cart_id, :user_id =>current_user.id }, method:'post', class:'btn btn-sm btn-block btn-primary' %></strong>
+            <strong><%= button_to "Place your order", { controller: 'orders', action: 'place_order', :cart_id => @cart_id, :user_id =>current_user.id }, method:'post', class:'btn btn-sm btn-block btn-primary' %></strong>
           </td>
         </tr>
         <tr>
