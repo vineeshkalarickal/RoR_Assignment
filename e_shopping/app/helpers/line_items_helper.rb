@@ -16,8 +16,15 @@ module LineItemsHelper
   end
 
   def view_line_items(user_id)
-    @cart_items = LineItem.select('line_items.*, products.*, carts.id,  SUM(line_items.quantity) as tot_items').left_outer_joins(
+    @cart_items = LineItem.select('line_items.*, products.*, carts.id, carts.status,  SUM(line_items.quantity) as tot_items').left_outer_joins(
       :user, :cart, :product, :order
-    ).group(:product_id).where(user_id: user_id)
+    ).group(:product_id).where('line_items.user_id = :user_id and carts.status = :status', { user_id: user_id, status: true})
   end
+
+  def count_active_line_items(user_id)
+    @cart_items = LineItem.select('line_items.id, carts.id, carts.status').left_outer_joins(:cart).where('line_items.user_id = :user_id and carts.status = :status', { user_id: user_id, status: true})
+
+    @cart_items.to_a.count
+  end
+
 end

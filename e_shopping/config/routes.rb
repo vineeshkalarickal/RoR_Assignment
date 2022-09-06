@@ -28,15 +28,24 @@ Rails.application.routes.draw do
 
   get 'cart', to: 'cart#view_cart'
   get 'add_to_cart/:id', to: 'cart#create'
+
+  get 'view_order', to: 'orders#view'
+
   # post
   post 'new_product', to: 'products#create'
   post 'new_address', to: 'addresses#create'
-  post 'place_order', to: 'line_items#place_order'
+
+  post 'place_order', to: 'orders#place_order'
+  post 'create_order', to: 'orders#create'
+
   # delete
   delete 'delete_product/:id', to: 'products#destroy'
   delete 'delete_address/:id', to: 'addresses#destroy'
+
   delete 'delete_line_item/:id/:p_id/:u_id', to: 'line_items#destroy'
+
   # patch
   patch 'edit_product/:id', to: 'products#update'
+
   patch 'edit_address/:id', to: 'addresses#update'
 end

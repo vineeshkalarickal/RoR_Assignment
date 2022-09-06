@@ -10,7 +10,7 @@ class CartController < ApplicationController
   end
 
   def create
-    @cart = Cart.where(user_id: current_user.id).first
+    @cart = Cart.where(user_id: current_user.id, status: true).first
     @cart_id = @cart.id unless @cart.blank?
     # if cart is not found, create a new one
     @cart_id = create_new_cart(current_user.id) if @cart.blank?
