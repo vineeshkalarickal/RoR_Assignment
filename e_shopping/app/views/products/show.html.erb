@@ -12,12 +12,14 @@
       <%= image_tag(@product.image_url.url, alt: 'Image', :size => '160x160') %>
     </div>
     <div class="span6">
+    <% if current_user && !current_user.admin %>
       <div class="controls">
         <a href="/add_to_cart/<%= @product.id %>" type="submit" class="btn btn-large btn-primary pull-right">
           Add to cart
           <i class=" icon-shopping-cart"></i>
         </a>
       </div>
+      <% end %>
       <h3><%= @product.name %></h3>
       <hr class="soft"/>
       <form class="form-horizontal qtyFrm">

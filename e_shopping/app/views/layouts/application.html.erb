@@ -7,8 +7,8 @@
         <%= render "layouts/welcomeLine" %>
         <%= render 'layouts/nav_bar' %>
       </div>
-    </div>
-    <%= render 'layouts/alerts' %>
+      <%= render 'layouts/alerts' %>
+    </div>    
     <% if current_page?(root_url) && !user_signed_in? %>
       <%= render "home/carousal" %>
     <% end %>

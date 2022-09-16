@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_user_check, only: [:order_list]
   include AddressesHelper
 
   def index
@@ -18,6 +19,11 @@ class OrdersController < ApplicationController
   end
 
   def view
+    # @orders = Order.where(user_id: current_user.id).order('created_at DESC')
+    @orders = current_user.orders
+  end
+
+  def order_list
     @orders = Order.where(user_id: current_user.id).order('created_at DESC')
   end
 
@@ -53,6 +59,12 @@ class OrdersController < ApplicationController
     )
     @shipping_address = primary_address(current_user.id)
   end
+
+  def admin_user_check
+    redirect_to view_order_path, notice: "User #{params[:user_id]} not authorized to view the requested page" unless current_user.admin
+  end
+
+  private 
 
   def order_params
     params.require(:order).permit(:user_id, :address_id, :cart_id, :final_price, :order_status)

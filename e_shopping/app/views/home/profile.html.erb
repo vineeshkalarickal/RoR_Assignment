@@ -62,6 +62,24 @@
           </div>
         </li>
       <% end %>
+      <% unless !current_user.admin %>
+        <li class="span4">
+          <div class="thumbnail">
+            <h5 class="card-title">
+              <span class="icon-list icon-white"></span>
+              Manage Orders</h5>
+            <hr class="soft"/>
+            <p class="card-text">
+              <ol style="list-style-type: circle">
+                <li>Manage Orders received</li>
+                <li>Edit order status</li>
+                <li>view order status</li>
+              </ol>
+            </p>
+            <%= link_to 'Go', view_order_admin_path, :class => 'btn btn-primary' %>
+          </div>
+        </li>
+      <% end %>
       <li class="span4">
         <div class="thumbnail">
           <h5 class="card-title">
