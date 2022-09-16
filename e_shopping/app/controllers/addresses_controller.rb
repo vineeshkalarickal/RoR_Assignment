@@ -2,7 +2,9 @@ class AddressesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @addresses = Address.order('created_at ASC').where(user_id: current_user.id)
+    # @addresses = Address.order('created_at ASC').where(user_id: current_user.id)
+    # using association model
+    @addresses = current_user.addresses
   end
 
   def new

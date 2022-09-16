@@ -1,5 +1,5 @@
+<% if current_user && !current_user.admin %>
 <div class="pull-right">
-<%=  %>
   <%= link_to cart_path do %>
   <span class="btn btn-mini btn-primary">
     <i class="icon-shopping-cart icon-white"></i>
@@ -7,3 +7,4 @@
   </span>
   <% end %>
 </div>
+<% end %>

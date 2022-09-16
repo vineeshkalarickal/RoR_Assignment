@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :addresses, dependent: :destroy
   has_many :line_items, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   def username
     return self.name + ' [' + self.email + ']'

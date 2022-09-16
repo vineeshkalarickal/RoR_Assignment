@@ -9,11 +9,30 @@
 
   <% if user_signed_in? %>
     <ul class="thumbnails">
+      <% unless current_user && current_user.admin %>
 
-      <li class="span4">
-        <div class="thumbnail  text-left">
-          <% unless current_user && current_user.admin %>
-            <h5><span class="icon-shopping-cart icon-white"></span> Manage Cart</h5>
+        <li class="span4">
+          <div class="thumbnail  text-left">
+            <h5>
+              <span class="icon-file icon-white"></span>
+              Manage Orders</h5>
+            <hr class="soft"/>
+            <p class="card-text">
+              <ol style="list-style-type: circle">
+                <li>View Orders</li>
+                <li>Check Status</li>
+                <li>Cancel Order</li>
+              </ol>
+            </p>
+            <%= link_to "Go", view_order_path, class:"btn btn-primary" %>
+          </div>
+        </li>
+
+        <li class="span4">
+          <div class="thumbnail  text-left">
+            <h5>
+              <span class="icon-shopping-cart icon-white"></span>
+              Manage Cart</h5>
             <hr class="soft"/>
             <p class="card-text">
               <ol style="list-style-type: circle">
@@ -23,14 +42,14 @@
               </ol>
             </p>
             <%= link_to "Go", cart_path, class:"btn btn-primary" %>
-          <% end %>
-        </div>
-      </li>
+          </div>
+        </li>
 
-      <li class="span4">
-        <div class="thumbnail  text-left">
-          <% unless current_user && current_user.admin %>
-            <h5><span class="icon-book icon-white"></span> Manage Addresses</h5>
+        <li class="span4">
+          <div class="thumbnail  text-left">
+            <h5>
+              <span class="icon-book icon-white"></span>
+              Manage Addresses</h5>
             <hr class="soft"/>
             <p class="card-text">
               <ol style="list-style-type: circle">
@@ -40,12 +59,32 @@
               </ol>
             </p>
             <%= link_to "Go", addresses_path, class:"btn btn-primary" %>
-          <% end %>
-        </div>
-      </li>
+          </div>
+        </li>
+      <% end %>
+      <% unless !current_user.admin %>
+        <li class="span4">
+          <div class="thumbnail">
+            <h5 class="card-title">
+              <span class="icon-list icon-white"></span>
+              Manage Orders</h5>
+            <hr class="soft"/>
+            <p class="card-text">
+              <ol style="list-style-type: circle">
+                <li>Manage Orders received</li>
+                <li>Edit order status</li>
+                <li>view order status</li>
+              </ol>
+            </p>
+            <%= link_to 'Go', view_order_admin_path, :class => 'btn btn-primary' %>
+          </div>
+        </li>
+      <% end %>
       <li class="span4">
         <div class="thumbnail">
-          <h5 class="card-title"><span class="icon-user icon-white"></span> Manage User</h5>
+          <h5 class="card-title">
+            <span class="icon-user icon-white"></span>
+            Manage User</h5>
           <hr class="soft"/>
           <p class="card-text">
             <ol style="list-style-type: circle">

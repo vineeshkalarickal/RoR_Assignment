@@ -12,7 +12,9 @@
             <p><%= pluralize(product.quantity, 'item') %> left</p>
             <h4 style="text-align:center">
               <%= link_to "",  'view_product/'+product.id.to_s, class:"btn btn-success icon-zoom-in" %>
+              <% if current_user && !current_user.admin %>
               <%= link_to "",  'add_to_cart/'+product.id.to_s, class:"btn btn-primary icon-shopping-cart" %>
+              <% end %>
             </h4>
           </div>
         </div>
