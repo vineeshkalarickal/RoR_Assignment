@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
   end
 
   def order_list
-    @orders = Order.where(user_id: current_user.id).order('created_at DESC')
+    @orders = Order.order('created_at DESC')
   end
 
   def view_details
