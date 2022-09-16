@@ -66,4 +66,6 @@ irb(main):010:0> results.to_a
 
 
 
+results = ActiveRecord::Base.connection.execute(' SELECT line_items.id, carts.id, carts.status FROM "line_items" LEFT OUTER JOIN "carts" ON "carts"."id" = "line_items"."cart_id" WHERE (line_items.user_id = 5 and carts.status = 1) ')
+
 

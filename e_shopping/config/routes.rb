@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   get 'view_order', to: 'orders#view'
   get 'view_order_details/:id', to: 'orders#view_details'
+  get 'download_order/:id', to: 'orders#download_order'
 
   # post
   post 'new_product', to: 'products#create'

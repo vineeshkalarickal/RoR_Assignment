@@ -1,2 +1,90 @@
-<h1>Orders#view details</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+<div class="span12">
+  <div class="row">
+    <div class="span9">
+      <div class="col-md-6 text-right mt-3">
+        <h4 class="text-danger mb-0">E-Shopping</h4>
+        <span>customer-help@eshop.com</span></div>
+      <div class="billed">
+        <span class="font-weight-bold text-uppercase">Baker Street 221/B</span></div>
+      <div class="billed">
+        <span class="font-weight-bold text-uppercase">Bangalore</span><span class="ml-1">, India</span></div>
+      <div class="billed">
+        <span class="font-weight-bold text-uppercase">Zip: 958656</span></div>
+      <br>
+      <div class="billed">
+        <span class="font-weight-bold text-uppercase">Date:</span><span class="ml-1"> <%= @order.created_at.strftime("%d/%m/%Y")%></span></div>
+      <div class="billed">
+        <span class="font-weight-bold text-uppercase">Order ID:</span><span class="ml-1"> #<%= @order.id%></span></div>
+    </div>
+
+    <div class="span3">
+      <div class="billed">
+        <div class="col-md-6 text-right mt-3">
+          <h4 class="text-danger mb-0"><%= @address.name %></h4>
+          <span><%= @address.email %></span></div>
+        <span class="font-weight-bold text-uppercase">
+          <b>Shipping address:</b>
+        </span>
+        <span class="ml-1">
+          <%= @address.address %>
+          <br/>
+          <%= @address.street %>
+          <br/>
+          <%= @address.city %>
+          ,
+          <%= @address.state %>
+          <br/>
+          Zip:
+          <%= @address.zip %>
+          <br/>
+        </span>
+      </div>
+    </div>
+
+    <div class="span12">
+      <hr>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Unit</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%
+            total_items_price = lambda { |quantity,price| quantity*price }
+            final_price = lambda { |quantity,item_total| quantity*item_total }
+            final_amount_payable = 0
+            @order_items.each do |line_item|
+            @cart_id = line_item.cart_id
+            item_total = total_items_price.call(line_item.tot_items, line_item.item_price)
+            item_final_amount = final_price.call(line_item.tot_items, line_item.item_total)
+            %>
+              <tr>
+                <td><%= line_item.product.name %></td>
+                <td><%= line_item.tot_items %></td>
+                <td><%= line_item.product.price %></td>
+                <td><%= item_total %></td>
+              </tr>
+            <% end %>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td class="pull-right">
+                <b>Total amount paid after discount:</b>
+              </td>
+              <td><%= @order.final_price %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pull-right">
+      <%= link_to 'Download Invoice', { controller: 'orders', action: 'download_order', id: @order.id }, class:'btn btn-primary'  %>
+    </div>
+  </div>
+</div>

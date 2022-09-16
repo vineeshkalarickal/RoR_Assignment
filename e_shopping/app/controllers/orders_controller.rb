@@ -23,7 +23,27 @@ class OrdersController < ApplicationController
 
   def view_details
     @order = Order.find(params[:id])
+    @address = get_address(@order.address_id, @order.user_id)
+
+    @order_items = LineItem.select('line_items.*, products.*, carts.id,  SUM(line_items.quantity) as tot_items').left_outer_joins( :cart, :product ).group(:product_id).where(
+      ['line_items.user_id = :user_id and line_items.cart_id = :cart_id',
+       { user_id: @order.user_id, cart_id: @order.cart_id }]
+    )
+    
   end
+
+  def download_order
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name",
+        template: "orders/view_details.html.erb"   # Excluding ".pdf" extension.
+      end
+    end
+    
+  end
+
 
   def place_order
     @place_order_items = 
