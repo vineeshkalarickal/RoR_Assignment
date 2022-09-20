@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user_check, only: [:order_list]
+  Mime::Type.register "application/pdf", :pdf
   include AddressesHelper
 
   def index
@@ -43,7 +44,8 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "file_name",
+        render pdf: "order_invoice_pdf",
+        disposition: 'attachment',                 # default 'inline'
         template: "orders/view_details.html.erb"   # Excluding ".pdf" extension.
       end
     end
