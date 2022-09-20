@@ -30,7 +30,7 @@
         <td><%= i+=1 %></td>        
         <td><%= ord.id %></td>
         <td><%= ord.final_price %></td>
-        <td><span  class="label label-success"><%= ord.order_status %></status></td>
+        <td><span  class="label label-success"><%= ord.order_status %></span></td>
         <td><%= link_to '', { controller: 'orders', action: 'view_details' ,id: ord.id }, class:'btn icon-eye-open' %></td>
       </tr>
     <% end %>
