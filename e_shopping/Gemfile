@@ -63,6 +63,7 @@ group :development, :test do
   gem 'guard', '~> 2.18'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do

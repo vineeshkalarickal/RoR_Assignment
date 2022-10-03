@@ -16,7 +16,7 @@ end
 # DB Operations:
 ```sh
 <%= f.select :product_id,
-              options_from_collection_for_select(Product.all, "id", "product_name", f.object.product_id), 
+              options_from_collection_for_select(Product.all, "id", "product_name", f.object.product_id),
               prompt: "Select something" %>
 ```
 # In Controller
@@ -67,15 +67,19 @@ rails generate rspec:model user
 --This runs only tests on line 10 in the Story model.
 
 > Default: Run all spec files (i.e., those matching spec/**/*_spec.rb)
-$ bundle exec rspec
+  `bundle exec rspec`
 
 ### Run all spec files in a single directory (recursively)
 `bundle exec rspec spec/models`
 ### Run a single spec file
 `bundle exec rspec spec/controllers/accounts_controller_spec.rb`
 # Run a single example from a spec file (by line number)
-$ bundle exec rspec spec/controllers/accounts_controller_spec.rb:8
+`bundle exec rspec spec/controllers/accounts_controller_spec.rb:8`
 
 > See all options for running specs
 `bundle exec rspec --help`
+
+> Run db migrations for test
+rails db:migrate RAILS_ENV=test
+
 
